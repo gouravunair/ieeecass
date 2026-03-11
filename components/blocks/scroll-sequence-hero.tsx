@@ -130,11 +130,19 @@ const ScrollSequenceHero = ({
                     style={{ opacity: textOpacity, scale: textScale }}
                     className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
                 >
-                    <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black text-white mix-blend-difference tracking-tighter uppercase mb-4">
-                        {title}
+                    <motion.img 
+                        src="/ieee-cass-logo.png" 
+                        alt="IEEE CASS Kerala Logo" 
+                        className="h-24 md:h-32 mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                    />
+                    <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter uppercase mb-4">
+                        <span className="text-green-600">CASS</span> <span className="text-white">KERALA</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-white/60 font-medium tracking-[0.5em] uppercase">
-                        {subtitle}
+                    <p className="text-xl md:text-2xl font-medium tracking-[0.5em] uppercase">
+                        <span className="text-green-600">Innovation</span> <span className="text-white">and Reality</span>
                     </p>
                 </motion.div>
 

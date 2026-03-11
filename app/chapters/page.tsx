@@ -52,12 +52,12 @@ export default function Chapters() {
     ];
 
     return (
-        <div className="flex min-h-screen flex-col items-center bg-[#040505] font-sans">
+        <div className="flex min-h-screen flex-col items-center bg-background font-sans">
             <NavBarDemo />
 
             <main className="w-full max-w-7xl py-32 px-6">
                 <div className="mb-24 text-center animate-in fade-in zoom-in duration-1000">
-                    <h1 className="text-7xl font-black text-white mb-8 tracking-tighter">
+                    <h1 className="text-7xl font-black text-foreground mb-8 tracking-tighter">
                         Student Branch <span className="text-green-600">Chapters</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -67,12 +67,12 @@ export default function Chapters() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {branches.map((branch, i) => (
-                        <div key={i} className="group relative p-10 rounded-[3rem] bg-neutral-900 border border-neutral-800 hover:bg-[#0a0a0a] transition-all duration-500 hover:shadow-2xl flex flex-col items-center text-center">
+                        <div key={i} className="group relative p-10 rounded-[3rem] bg-white border border-neutral-100 hover:bg-neutral-50 transition-all duration-500 hover:shadow-2xl flex flex-col items-center text-center">
                             <div className="absolute top-6 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <ArrowUpRight className="w-5 h-5 text-green-600" />
                             </div>
 
-                            <div className="relative w-24 h-24 mb-8 bg-black rounded-3xl p-4 border border-neutral-800 shadow-sm transition-transform group-hover:scale-110 duration-500">
+                            <div className="relative w-24 h-24 mb-8 bg-neutral-50 rounded-3xl p-4 border border-neutral-100 shadow-sm transition-transform group-hover:scale-110 duration-500">
                                 <Image
                                     src={branch.logo}
                                     alt={branch.name}
@@ -82,14 +82,14 @@ export default function Chapters() {
                                 />
                             </div>
 
-                            <h3 className="text-xl font-black text-neutral-50 mb-6 leading-tight">
+                            <h3 className="text-xl font-black text-foreground mb-6 leading-tight">
                                 {branch.name}
                             </h3>
 
                             <div className="space-y-4 mt-auto">
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[10px] uppercase font-black tracking-widest text-neutral-500">Advisor</span>
-                                    <span className="text-sm font-bold text-neutral-300">{branch.advisor}</span>
+                                    <span className="text-sm font-bold text-neutral-600">{branch.advisor}</span>
                                 </div>
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[10px] uppercase font-black tracking-widest text-neutral-500">Local Section</span>

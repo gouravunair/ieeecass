@@ -46,13 +46,13 @@ export default function Events() {
     ];
 
     return (
-        <div className="flex min-h-screen flex-col items-center bg-[#040505] font-sans">
+        <div className="flex min-h-screen flex-col items-center bg-background font-sans">
             <NavBarDemo />
 
             <main className="w-full max-w-7xl py-32 px-6">
                 <div className="mb-24 animate-in fade-in slide-in-from-left-8 duration-700">
                     <span className="text-green-600 font-bold uppercase tracking-widest text-xs">Knowledge Sharing</span>
-                    <h1 className="text-7xl font-black text-white mb-6 tracking-tighter">
+                    <h1 className="text-7xl font-black text-foreground mb-6 tracking-tighter">
                         Chapter <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-600">Events</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed font-medium">
@@ -62,7 +62,7 @@ export default function Events() {
 
                 <div className="grid grid-cols-1 gap-16">
                     {events.map((event, i) => (
-                        <div key={i} className="group relative flex flex-col lg:flex-row gap-12 items-center p-8 rounded-[3rem] bg-neutral-900 border border-neutral-800 hover:shadow-3xl transition-all duration-700 hover:-translate-y-2">
+                        <div key={i} className="group relative flex flex-col lg:flex-row gap-12 items-center p-8 rounded-[3rem] bg-white border border-neutral-200 hover:shadow-3xl transition-all duration-700 hover:-translate-y-2">
                             <div className="relative w-full lg:w-1/2 h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl">
                                 <Image
                                     src={event.img}
@@ -82,7 +82,7 @@ export default function Events() {
                                     <span className="text-green-600 font-bold text-xs tracking-widest uppercase">{event.status}</span>
                                 </div>
 
-                                <h3 className="text-4xl font-extrabold text-white leading-tight group-hover:text-green-600 transition-colors">
+                                <h3 className="text-4xl font-extrabold text-foreground leading-tight group-hover:text-green-600 transition-colors">
                                     {event.title}
                                 </h3>
 
@@ -90,7 +90,7 @@ export default function Events() {
                                     {event.desc}
                                 </p>
 
-                                <div className="flex flex-wrap gap-8 py-6 border-y border-neutral-800">
+                                <div className="flex flex-wrap gap-8 py-6 border-y border-neutral-100">
                                     <div className="flex items-center gap-3">
                                         <Calendar className="w-5 h-5 text-neutral-500" />
                                         <div>
@@ -108,7 +108,7 @@ export default function Events() {
                                 </div>
 
                                 <div className="pt-4">
-                                    <button className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-green-600 hover:text-white transition-all group/btn shadow-lg">
+                                    <button className="flex items-center gap-3 px-8 py-4 bg-neutral-900 text-white rounded-full font-bold hover:bg-green-600 hover:text-white transition-all group/btn shadow-lg">
                                         Get Details <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
                                     </button>
                                 </div>

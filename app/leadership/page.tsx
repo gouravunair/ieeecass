@@ -40,12 +40,12 @@ export default function Leadership() {
     ];
 
     return (
-        <div className="flex min-h-screen flex-col items-center bg-[#040505] font-sans">
+        <div className="flex min-h-screen flex-col items-center bg-background font-sans">
             <NavBarDemo />
 
             <main className="w-full max-w-7xl py-32 px-6">
                 <div className="mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    <h1 className="text-7xl font-black text-white mb-6 tracking-tight">
+                    <h1 className="text-7xl font-black text-foreground mb-6 tracking-tight">
                         Leadership <span className="text-green-600 font-outline-2">Team</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed font-medium">
@@ -57,7 +57,7 @@ export default function Leadership() {
                     {leaders.map((leader, i) => (
                         <div
                             key={i}
-                            className="group relative flex flex-col p-1 rounded-[2.5rem] bg-gradient-to-b from-neutral-900 to-[#040505] border border-neutral-800 hover:border-green-600 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2"
+                            className="group relative flex flex-col p-1 rounded-[2.5rem] bg-white border border-neutral-200 hover:border-green-600 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2"
                             style={{ animationDelay: `${i * 100}ms` }}
                         >
                             <div className="relative h-80 w-full overflow-hidden rounded-[2.2rem]">
@@ -73,7 +73,7 @@ export default function Leadership() {
 
                             <div className="p-8">
                                 <div className="flex items-center justify-between mb-2">
-                                    <h4 className="text-2xl font-bold text-neutral-50 tracking-tight group-hover:text-green-600 transition-colors">
+                                    <h4 className="text-2xl font-bold text-foreground tracking-tight group-hover:text-green-600 transition-colors">
                                         {leader.name}
                                     </h4>
                                     <ShieldCheck className="w-5 h-5 text-green-600 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all" />
@@ -86,10 +86,10 @@ export default function Leadership() {
                                 </p>
 
                                 <div className="flex border-t border-neutral-800 pt-6 gap-4">
-                                    <a href="#" className="p-3 bg-neutral-900 rounded-2xl hover:bg-green-600 hover:text-white transition-all">
+                                    <a href="#" className="p-3 bg-neutral-100 rounded-2xl hover:bg-green-600 hover:text-white transition-all">
                                         <Mail className="w-4 h-4" />
                                     </a>
-                                    <a href="#" className="p-3 bg-neutral-900 rounded-2xl hover:bg-green-600 hover:text-white transition-all">
+                                    <a href="#" className="p-3 bg-neutral-100 rounded-2xl hover:bg-green-600 hover:text-white transition-all">
                                         <MapPin className="w-4 h-4" />
                                     </a>
                                 </div>

@@ -78,11 +78,11 @@ export default function Home() {
                 <ArrowRight className="w-6 h-6 transform -rotate-45 group-hover:rotate-0 transition-transform group-hover:text-white dark:group-hover:text-black" />
               </Link>
 
-              <Link href="/leadership" className="group p-10 bg-neutral-50 dark:bg-neutral-900 rounded-[3rem] border border-neutral-200 dark:border-neutral-800 hover:bg-black dark:hover:bg-white transition-all duration-500">
-                <Users className="w-10 h-10 mb-6 text-green-600" />
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-white dark:group-hover:text-black">Meet our Team</h3>
-                <p className="text-neutral-500 mb-8 font-medium">The experts leading the Kerala Section.</p>
-                <ArrowRight className="w-6 h-6 transform -rotate-45 group-hover:rotate-0 transition-transform group-hover:text-white dark:group-hover:text-black" />
+              <Link href="/leadership" className="group p-10 bg-neutral-50 dark:bg-neutral-900 rounded-[3rem] border border-neutral-200 dark:border-neutral-800 hover:bg-green-600 dark:hover:bg-green-600 transition-all duration-500 hover:scale-[1.02] active:scale-95 cursor-pointer">
+                <Users className="w-10 h-10 mb-6 text-green-600 group-hover:text-white" />
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-white transition-colors">Meet our Team</h3>
+                <p className="text-neutral-500 mb-8 font-medium group-hover:text-white/80 transition-colors">The experts leading the Kerala Section.</p>
+                <ArrowRight className="w-6 h-6 transform -rotate-45 group-hover:rotate-0 transition-transform group-hover:text-white" />
               </Link>
 
               <div className="p-10 bg-green-600 rounded-[3rem] text-white flex flex-col justify-between items-start shadow-xl shadow-green-600/20">
@@ -90,9 +90,14 @@ export default function Home() {
                   <h3 className="text-4xl font-black mb-4 leading-tight">Join the Community.</h3>
                   <p className="text-white/80 font-medium">Become a member of IEEE CASS and unlock global opportunities.</p>
                 </div>
-                <button className="mt-8 px-12 py-4 bg-white text-green-600 rounded-full font-black text-sm hover:scale-105 transition-transform shadow-lg">
+                <a 
+                  href="https://www.ieee.org/membership-catalog/productdetail/showProductDetailPage.html?product=MEMCAS004&refProd=MEMCAS004" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-8 px-12 py-4 bg-white text-green-600 rounded-full font-black text-sm hover:scale-105 active:scale-95 transition-all shadow-lg text-center"
+                >
                   Apply Now
-                </button>
+                </a>
               </div>
             </div>
           </section>

@@ -167,7 +167,11 @@ const ScrollSequenceHero = ({
 
                 {/* Sub-content Overlay (appears as scroll reaches end) */}
                 <motion.div
-                    style={{ opacity: contentOpacity, y: contentY }}
+                    style={{ 
+                        opacity: contentOpacity, 
+                        y: contentY,
+                        pointerEvents: smoothProgress.get() > 0.8 ? 'auto' : 'none'
+                    }}
                     className="absolute inset-0 z-20 overflow-y-auto pt-[10vh] md:pt-[20vh]"
                 >
                     <div className="w-full min-h-screen">
@@ -178,7 +182,7 @@ const ScrollSequenceHero = ({
                 {/* Scroll Indicator */}
                 <motion.div
                     style={{ opacity: textOpacity }}
-                    className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+                    className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
                 >
                     <span className="text-[8px] md:text-[10px] uppercase font-black tracking-[0.3em] text-white/30">Scroll to Deconstruct</span>
                     <div className="w-[1px] h-10 md:h-16 bg-gradient-to-b from-green-600 to-transparent" />

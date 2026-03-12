@@ -56,7 +56,7 @@ export default function Home() {
 
             <div className="relative group">
               <div className="absolute -inset-4 bg-green-600/10 rounded-[3rem] blur-3xl group-hover:bg-green-600/20 transition-all duration-700" />
-              <div className="relative h-[500px] w-full rounded-[2.5rem] overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow-2xl">
+              <div className="relative h-[300px] md:h-[500px] w-full rounded-[2.5rem] overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow-2xl">
                 <Image
                   src="https://cas.ieeekerala.org/events/casif.jpg"
                   alt="CASIF Forum"

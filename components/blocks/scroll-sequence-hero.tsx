@@ -28,18 +28,18 @@ const ScrollSequenceHero = ({
     });
 
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
+        stiffness: 150, // Increased for snappier feel
+        damping: 40,    // Adjusted for better smoothing
+        restDelta: 0.01 // Settles faster
     });
 
     // Expansion transforms for the content that comes in later
     const contentOpacity = useTransform(smoothProgress, [0.8, 0.95], [0, 1]);
-    const contentY = useTransform(smoothProgress, [0.8, 1], [100, 0]);
+    const contentY = useTransform(smoothProgress, [0.8, 1], [30, 0]); // Reduced movement for mobile
 
-    // Text animation (split and fade)
-    const textOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
-    const textScale = useTransform(smoothProgress, [0, 0.3], [1, 0.8]);
+    // Text animation (split and fade) - adjust timing for mobile
+    const textOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
+    const textScale = useTransform(smoothProgress, [0, 0.2], [1, 0.9]);
 
     // Preload images
     useEffect(() => {
@@ -64,12 +64,17 @@ const ScrollSequenceHero = ({
         if (images.length === 0 || !canvasRef.current) return;
 
         const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { alpha: false }); // Optimize for non-transparent
         if (!context) return;
 
+        let rafId: number;
+        let lastFrame = -1;
+
         const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x for performance
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            context.scale(dpr, dpr);
             render();
         };
 
@@ -79,31 +84,42 @@ const ScrollSequenceHero = ({
                 Math.floor(smoothProgress.get() * frameCount)
             );
 
+            if (frameIndex === lastFrame) return;
+            lastFrame = frameIndex;
+
             const img = images[frameIndex];
             if (!img) return;
 
-            // Draw image centered and covering (cover object-fit equivalent)
-            const canvasAspect = canvas.width / canvas.height;
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+
+            const canvasAspect = w / h;
             const imgAspect = img.width / img.height;
             let drawWidth, drawHeight, offsetX, offsetY;
 
             if (canvasAspect > imgAspect) {
-                drawWidth = canvas.width;
-                drawHeight = canvas.width / imgAspect;
+                drawWidth = w;
+                drawHeight = w / imgAspect;
                 offsetX = 0;
-                offsetY = (canvas.height - drawHeight) / 2;
+                offsetY = (h - drawHeight) / 2;
             } else {
-                drawWidth = canvas.height * imgAspect;
-                drawHeight = canvas.height;
-                offsetX = (canvas.width - drawWidth) / 2;
+                drawWidth = h * imgAspect;
+                drawHeight = h;
+                offsetX = (w - drawWidth) / 2;
                 offsetY = 0;
             }
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = '#040505';
+            context.fillRect(0, 0, w, h);
             context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         };
 
-        const unsubscribe = smoothProgress.on("change", render);
+        const handleScroll = () => {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(render);
+        };
+
+        const unsubscribe = smoothProgress.on("change", handleScroll);
 
         // Initial setup
         resizeCanvas();
@@ -111,37 +127,40 @@ const ScrollSequenceHero = ({
 
         return () => {
             unsubscribe();
+            cancelAnimationFrame(rafId);
             window.removeEventListener('resize', resizeCanvas);
         };
     }, [images, frameCount, smoothProgress]);
 
     return (
         <div ref={containerRef} className="relative h-[400vh] w-full bg-[#040505]">
-            <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+            <div className="sticky top-0 h-[100dvh] w-full overflow-hidden will-change-transform">
 
                 {/* Canvas Layer */}
                 <canvas
                     ref={canvasRef}
-                    className="absolute inset-0 z-0 w-full h-full"
+                    className="absolute inset-0 z-0 w-full h-full transform-gpu pointer-events-none"
                 />
 
                 {/* Initial Hero Text Overlay */}
                 <motion.div
                     style={{ opacity: textOpacity, scale: textScale }}
                     className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                 >
                     <motion.img 
                         src="/ieee-cass-logo.png" 
                         alt="IEEE CASS Kerala Logo" 
-                        className="h-16 md:h-24 lg:h-32 mb-6 md:mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                        initial={{ opacity: 0, y: 20 }}
+                        className="h-14 md:h-24 lg:h-32 mb-4 md:mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.5 }}
+                        transition={{ duration: 1, delay: 0.2 }}
                     />
-                    <h1 className="text-4xl md:text-8xl lg:text-[10rem] font-black tracking-tighter uppercase mb-2 md:mb-4">
+                    <h1 className="text-3xl md:text-8xl lg:text-[10rem] font-black tracking-tighter uppercase mb-1 md:mb-4">
                         <span className="text-green-600">CASS</span> <span className="text-white">KERALA</span>
                     </h1>
-                    <p className="text-xs md:text-xl lg:text-2xl font-medium tracking-[0.2em] md:tracking-[0.5em] uppercase">
+                    <p className="text-[10px] md:text-xl lg:text-2xl font-medium tracking-[0.2em] md:tracking-[0.5em] uppercase">
                         <span className="text-green-600">Innovation</span> <span className="text-white">and Reality</span>
                     </p>
                 </motion.div>

@@ -28,18 +28,18 @@ const ScrollSequenceHero = ({
     });
 
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 150, // Increased for snappier feel
-        damping: 40,    // Adjusted for better smoothing
-        restDelta: 0.01 // Settles faster
+        stiffness: 200, // Faster response
+        damping: 50,
+        restDelta: 0.01
     });
 
     // Expansion transforms for the content that comes in later
     const contentOpacity = useTransform(smoothProgress, [0.8, 0.95], [0, 1]);
-    const contentY = useTransform(smoothProgress, [0.8, 1], [30, 0]); // Reduced movement for mobile
+    const contentY = useTransform(smoothProgress, [0.8, 1], [30, 0]);
 
-    // Text animation (split and fade) - adjust timing for mobile
-    const textOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
-    const textScale = useTransform(smoothProgress, [0, 0.2], [1, 0.9]);
+    // Faster text fade so deconstruction is seen immediately
+    const textOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
+    const textScale = useTransform(smoothProgress, [0, 0.1], [1, 0.95]);
 
     // Preload images
     useEffect(() => {
@@ -133,7 +133,7 @@ const ScrollSequenceHero = ({
     }, [images, frameCount, smoothProgress]);
 
     return (
-        <div ref={containerRef} className="relative h-[400vh] w-full bg-[#040505]">
+        <div ref={containerRef} className="relative h-[250vh] md:h-[400vh] w-full bg-[#040505]">
             <div className="sticky top-0 h-[100dvh] w-full overflow-hidden will-change-transform">
 
                 {/* Canvas Layer */}

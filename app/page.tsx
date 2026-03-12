@@ -18,19 +18,19 @@ export default function Home() {
         title="CASS KERALA"
         subtitle="Innovation and Reality"
       >
-        <div className="max-w-7xl mx-auto py-24 px-6 bg-white dark:bg-neutral-950 rounded-t-[4rem] -mt-10 relative z-40 border-t border-white/10">
+        <div className="max-w-7xl mx-auto py-12 md:py-24 px-6 bg-white dark:bg-neutral-950 rounded-t-[2.5rem] md:rounded-t-[4rem] -mt-10 relative z-40 border-t border-white/10">
 
           {/* Main Info Section */}
-          <section id="about" className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-full text-xs font-black uppercase tracking-widest">
+          <section id="about" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24 md:mb-40">
+            <div className="space-y-6 md:space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest">
                 <div className="w-2 h-2 rounded-full bg-green-600 animate-ping" />
                 IEEE Circuits & Systems Society
               </div>
-              <h2 className="text-6xl font-black text-foreground dark:text-neutral-50 tracking-tighter leading-[1.1]">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground dark:text-neutral-50 tracking-tighter leading-[1.1]">
                 Leading the <span className="text-green-600">Analog & Digital</span> Revolution.
               </h2>
-              <p className="text-xl text-neutral-500 leading-relaxed max-w-xl font-medium">
+              <p className="text-base md:text-xl text-neutral-500 leading-relaxed max-w-xl font-medium">
                 The IEEE CASS Kerala Chapter serves as a catalyst for technical excellence, providing researchers and students with a platform to pioneer next-gen integrated circuits.
               </p>
 

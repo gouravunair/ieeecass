@@ -57,7 +57,7 @@ export default function Chapters() {
 
             <main className="w-full max-w-7xl py-32 px-6">
                 <div className="mb-24 text-center animate-in fade-in zoom-in duration-1000">
-                    <h1 className="text-7xl font-black text-foreground mb-8 tracking-tighter">
+                    <h1 className="text-4xl md:text-7xl font-black text-foreground mb-8 tracking-tighter">
                         Student Branch <span className="text-green-600">Chapters</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -107,7 +107,7 @@ export default function Chapters() {
 
                     <div className="relative p-16 md:p-24 text-center">
                         <GraduationCap className="w-16 h-16 text-white/40 mx-auto mb-8 animate-bounce" />
-                        <h2 className="text-6xl font-black text-white mb-6 tracking-tight">Form a Chapter.</h2>
+                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Form a Chapter.</h2>
                         <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12 font-medium">
                             Bring world-class CASS resources, funding, and mentorship to your college. Our team will guide you through the petition process.
                         </p>

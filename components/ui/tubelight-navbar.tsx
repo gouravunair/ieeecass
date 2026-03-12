@@ -20,21 +20,33 @@ interface NavBarProps {
 export function NavBar({ items, className }: NavBarProps) {
     const [activeTab, setActiveTab] = useState(items[0].name)
     const [isMobile, setIsMobile] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768)
         }
 
+        const handleScroll = () => {
+            // Show navbar after scrolling 100px
+            setIsVisible(window.scrollY > 100)
+        }
+
         handleResize()
+        handleScroll()
         window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("resize", handleResize)
+            window.removeEventListener("scroll", handleScroll)
+        }
     }, [])
 
     return (
         <div
             className={cn(
-                "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
+                "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6 transition-all duration-500",
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 sm:-translate-y-4 pointer-events-none",
                 className,
             )}
         >

@@ -52,7 +52,7 @@ export default function Events() {
             <main className="w-full max-w-7xl py-32 px-6">
                 <div className="mb-24 animate-in fade-in slide-in-from-left-8 duration-700">
                     <span className="text-green-600 font-bold uppercase tracking-widest text-xs">Knowledge Sharing</span>
-                    <h1 className="text-7xl font-black text-foreground mb-6 tracking-tighter">
+                    <h1 className="text-4xl md:text-7xl font-black text-foreground mb-6 tracking-tighter">
                         Chapter <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-600">Events</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed font-medium">
@@ -82,7 +82,7 @@ export default function Events() {
                                     <span className="text-green-600 font-bold text-xs tracking-widest uppercase">{event.status}</span>
                                 </div>
 
-                                <h3 className="text-4xl font-extrabold text-foreground leading-tight group-hover:text-green-600 transition-colors">
+                                <h3 className="text-2xl md:text-4xl font-extrabold text-foreground leading-tight group-hover:text-green-600 transition-colors">
                                     {event.title}
                                 </h3>
 

@@ -63,13 +63,17 @@ const ScrollSequenceHero = ({
     useEffect(() => {
         if (images.length === 0 || !canvasRef.current) return;
 
-        const render = () => {
-            const canvas = canvasRef.current;
-            if (!canvas) return;
-            const context = canvas.getContext('2d');
-            if (!context) return;
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        if (!context) return;
 
-            // Calculate current frame
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+        };
+
+        const render = () => {
             const frameIndex = Math.min(
                 frameCount - 1,
                 Math.floor(smoothProgress.get() * frameCount)
@@ -77,10 +81,6 @@ const ScrollSequenceHero = ({
 
             const img = images[frameIndex];
             if (!img) return;
-
-            // Responsive canvas sizing
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
 
             // Draw image centered and covering (cover object-fit equivalent)
             const canvasAspect = canvas.width / canvas.height;
@@ -105,19 +105,19 @@ const ScrollSequenceHero = ({
 
         const unsubscribe = smoothProgress.on("change", render);
 
-        // Initial draw
-        render();
-        window.addEventListener('resize', render);
+        // Initial setup
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         return () => {
             unsubscribe();
-            window.removeEventListener('resize', render);
+            window.removeEventListener('resize', resizeCanvas);
         };
     }, [images, frameCount, smoothProgress]);
 
     return (
         <div ref={containerRef} className="relative h-[400vh] w-full bg-[#040505]">
-            <div className="sticky top-0 h-screen w-full overflow-hidden">
+            <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
 
                 {/* Canvas Layer */}
                 <canvas
@@ -133,15 +133,15 @@ const ScrollSequenceHero = ({
                     <motion.img 
                         src="/ieee-cass-logo.png" 
                         alt="IEEE CASS Kerala Logo" 
-                        className="h-24 md:h-32 mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        className="h-16 md:h-24 lg:h-32 mb-6 md:mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.5 }}
                     />
-                    <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter uppercase mb-4">
+                    <h1 className="text-4xl md:text-8xl lg:text-[10rem] font-black tracking-tighter uppercase mb-2 md:mb-4">
                         <span className="text-green-600">CASS</span> <span className="text-white">KERALA</span>
                     </h1>
-                    <p className="text-xl md:text-2xl font-medium tracking-[0.5em] uppercase">
+                    <p className="text-xs md:text-xl lg:text-2xl font-medium tracking-[0.2em] md:tracking-[0.5em] uppercase">
                         <span className="text-green-600">Innovation</span> <span className="text-white">and Reality</span>
                     </p>
                 </motion.div>
@@ -149,7 +149,7 @@ const ScrollSequenceHero = ({
                 {/* Sub-content Overlay (appears as scroll reaches end) */}
                 <motion.div
                     style={{ opacity: contentOpacity, y: contentY }}
-                    className="absolute inset-0 z-20 overflow-y-auto pt-[20vh]"
+                    className="absolute inset-0 z-20 overflow-y-auto pt-[10vh] md:pt-[20vh]"
                 >
                     <div className="w-full min-h-screen">
                         {children}
@@ -159,10 +159,10 @@ const ScrollSequenceHero = ({
                 {/* Scroll Indicator */}
                 <motion.div
                     style={{ opacity: textOpacity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+                    className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
                 >
-                    <span className="text-[10px] uppercase font-black tracking-[0.3em] text-white/30">Scroll to Deconstruct</span>
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-green-600 to-transparent" />
+                    <span className="text-[8px] md:text-[10px] uppercase font-black tracking-[0.3em] text-white/30">Scroll to Deconstruct</span>
+                    <div className="w-[1px] h-10 md:h-16 bg-gradient-to-b from-green-600 to-transparent" />
                 </motion.div>
             </div>
         </div>

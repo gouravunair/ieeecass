@@ -166,18 +166,20 @@ const ScrollSequenceHero = ({
                 </motion.div>
 
                 {/* Sub-content Overlay (appears as scroll reaches end) */}
-                <motion.div
-                    style={{ 
-                        opacity: contentOpacity, 
-                        y: contentY,
-                        pointerEvents: smoothProgress.get() > 0.8 ? 'auto' : 'none'
-                    }}
-                    className="absolute inset-0 z-20 overflow-y-auto pt-[10vh] md:pt-[20vh]"
-                >
-                    <div className="w-full min-h-screen">
-                        {children}
-                    </div>
-                </motion.div>
+                {children && (
+                    <motion.div
+                        style={{ 
+                            opacity: contentOpacity, 
+                            y: contentY,
+                            pointerEvents: smoothProgress.get() > 0.8 ? 'auto' : 'none'
+                        }}
+                        className="absolute inset-0 z-20 pt-[10vh] md:pt-[20vh]"
+                    >
+                        <div className="w-full min-h-screen">
+                            {children}
+                        </div>
+                    </motion.div>
+                )}
 
                 {/* Scroll Indicator */}
                 <motion.div

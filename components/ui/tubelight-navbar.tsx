@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { LucideIcon } from "lucide-react"
@@ -22,14 +22,46 @@ export function NavBar({ items, className }: NavBarProps) {
     const [isMobile, setIsMobile] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
 
+    const handleScroll = useCallback(() => {
+        // Show navbar after scrolling 100px
+        setIsVisible(window.scrollY > 100)
+
+        // Scroll Spy Logic
+        const sections = items.map(item => {
+            const id = item.url.startsWith('#') ? item.url.substring(1) : null
+            if (!id) return null
+            const element = document.getElementById(id)
+            if (element) {
+                const rect = element.getBoundingClientRect()
+                return {
+                    name: item.name,
+                    top: rect.top + window.scrollY,
+                    bottom: rect.bottom + window.scrollY,
+                    dist: Math.abs(rect.top)
+                }
+            }
+            return null
+        }).filter(Boolean)
+
+        if (sections.length > 0) {
+            // Find the section that is currently in view
+            // We'll use the one closest to the top of the viewport
+            let currentSection = sections[0]
+            sections.forEach(section => {
+                if (section && section.top - 100 <= window.scrollY) {
+                    currentSection = section
+                }
+            })
+            
+            if (currentSection) {
+                setActiveTab(currentSection.name)
+            }
+        }
+    }, [items])
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768)
-        }
-
-        const handleScroll = () => {
-            // Show navbar after scrolling 100px
-            setIsVisible(window.scrollY > 100)
         }
 
         handleResize()
@@ -40,7 +72,18 @@ export function NavBar({ items, className }: NavBarProps) {
             window.removeEventListener("resize", handleResize)
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [])
+    }, [handleScroll])
+
+    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+        if (url.startsWith('#')) {
+            e.preventDefault()
+            const id = url.substring(1)
+            const element = document.getElementById(id)
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' })
+            }
+        }
+    }
 
     return (
         <div
@@ -59,7 +102,10 @@ export function NavBar({ items, className }: NavBarProps) {
                         <Link
                             key={item.name}
                             href={item.url}
-                            onClick={() => setActiveTab(item.name)}
+                            onClick={(e) => {
+                                setActiveTab(item.name)
+                                scrollToSection(e, item.url)
+                            }}
                             className={cn(
                                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
                                 "text-foreground/80 hover:text-primary",

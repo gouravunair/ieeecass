@@ -51,10 +51,10 @@ export const Footer = () => {
                         <div className='flex flex-col gap-6'>
                             <h4 className='uppercase font-black text-xs tracking-widest text-neutral-400'>Navigation</h4>
                             <div className="flex flex-col gap-4 text-sm font-bold text-neutral-600 dark:text-neutral-400 items-start">
-                                <Link className='hover:text-green-600 transition-colors' href="/">Home</Link>
-                                <Link className='hover:text-green-600 transition-colors' href="/events">Events</Link>
-                                <Link className='hover:text-green-600 transition-colors' href="/leadership">Leadership</Link>
-                                <Link className='hover:text-green-600 transition-colors' href="/chapters">Chapters</Link>
+                                <Link className='hover:text-green-600 transition-colors' href="#home">Home</Link>
+                                <Link className='hover:text-green-600 transition-colors' href="#events">Events</Link>
+                                <Link className='hover:text-green-600 transition-colors' href="#leadership">Leadership</Link>
+                                <Link className='hover:text-green-600 transition-colors' href="#chapters">Chapters</Link>
                             </div>
                         </div>
 

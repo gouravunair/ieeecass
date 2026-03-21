@@ -152,7 +152,11 @@ const ScrollSequenceHero = ({
                     <motion.img 
                         src="/ieee-cass-logo.png" 
                         alt="IEEE CASS Kerala Logo" 
-                        className="h-14 md:h-24 lg:h-32 mb-4 md:mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        className="h-14 md:h-24 lg:h-32 mb-4 md:mb-8 opacity-90 mix-blend-screen brightness-110 contrast-125 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                        style={{
+                            maskImage: 'radial-gradient(circle at center, black 55%, transparent 95%)',
+                            WebkitMaskImage: 'radial-gradient(circle at center, black 55%, transparent 95%)'
+                        }}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
